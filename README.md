@@ -67,10 +67,6 @@ No terminal:
 ## Comando para rodar com llama.cpp + Vulkan no servidor:
 ### Exemplo com Phi-3 Mini
 ```bash
-~/llama.cpp/build/llama-server -m ~/models/phi-3-mini/Phi-3-mini-4k-instruct-q4.gguf -ngl 35 --port 8080
-```
-
-```bash
 ~/llama.cpp/build/bin/llama-server \
   -m ~/models/phi-3-mini/Phi-3-mini-4k-instruct-q4.gguf \
   -c 4096 \
