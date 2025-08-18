@@ -70,6 +70,25 @@ No terminal:
 ~/llama.cpp/build/llama-server -m ~/models/phi-3-mini/Phi-3-mini-4k-instruct-q4.gguf -ngl 35 --port 8080
 ```
 
+```bash
+~/llama.cpp/build/bin/llama-server \
+  -m ~/models/phi-3-mini/Phi-3-mini-4k-instruct-q4.gguf \
+  -c 4096 \
+  -ngl 40 \
+  --port 8080 \
+  --host 0.0.0.0
+```
+
+Onde:
+- -m → caminho do modelo.
+- -c 4096 → contexto (tokens que o modelo consegue "lembrar" na janela). 
+
+Recomendo colocar explicitamente.
+- -ngl 40 → número de camadas offloaded para a GPU (se sua RX580 aguentar).
+- --port 8080 → porta da API.
+- --host 0.0.0.0 → expõe em todas as interfaces de rede.
+
+
 ### Para modelos maiores, ajuste -ngl (número de camadas na GPU)
 ```bash
 ~/llama.cpp/build/llama-server -m ~/models/mistral-7b/mistral-7b-instruct-v0.2.Q4_K_M.gguf -ngl 32 --port 8080
