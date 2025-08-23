@@ -104,6 +104,12 @@ Valores típicos para RX 580 8GB:
 - Phi-3 Mini: -ngl 35-40
 - Mistral 7B Q4: -ngl 28-32
 - Llama 3.1 8B Q4: -ngl 25-30
+- gemma-3-4b-it-Q4_K_M : -ngl 24-28
+- Gemma-3-4B Q4_K_M: 24–28
+  - Faixa prática: 20 – 24
+  - 20–22 → mais seguro, evita OOM em contexto 4096.
+  - 23–24 → dá mais uso de GPU, mas pode exigir reduzir -c (para 2048) ou -b (≤128).
+
 
 #### -n (number of tokens)
 Recomendações:
@@ -129,34 +135,45 @@ Recomendações:
 - Excelente qualidade para o tamanho
 - Roda muito bem no Vulkan
 
-    > huggingface-cli download microsoft/Phi-3-mini-4k-instruct-gguf --local-dir ~/models/phi-3-mini
+    > hf download microsoft/Phi-3-mini-4k-instruct-gguf --local-dir ~/models/phi-3-mini
 
 ### 2. Llama 3.2 3B:
 - ~2-3GB VRAM
 - Muito boa qualidade
 
-    > huggingface-cli download hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF --local-dir ~/models/llama-3.2-3b
+    > hf download hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF --local-dir ~/models/llama-3.2-3b
 
 ### 3. Mistral 7B (Aproveitando os 8GB):
 - ~5-6GB VRAM (Q4_K_M)
 - Excelente qualidade geral
 
-    > huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF --local-dir ~/models/mistral-7b
+    > hf download TheBloke/Mistral-7B-Instruct-v0.2-GGUF --local-dir ~/models/mistral-7b
 
 ### 4. Llama 3.1 8B (Máximo da sua GPU):
 - ~6-7GB VRAM
 - Estado da arte, mas pode ser mais lento
 
-    > huggingface-cli download hugging-quants/Meta-Llama-3.1-8B-Instruct-Q4_K_M-GGUF --local-dir ~/models/llama-3.1-8b
+    > hf download hugging-quants/Meta-Llama-3.1-8B-Instruct-Q4_K_M-GGUF --local-dir ~/models/llama-3.1-8b
 
 
 ### 5. gemma-3-4b-it-Q4_K_M.gguf
 
 ```bash
-huggingface-cli download tensorblock/gemma-3-4b-it-GGUF \
+hf download tensorblock/gemma-3-4b-it-GGUF \
   --include "gemma-3-4b-it-Q4_K_M.gguf" \
   --local-dir ~/models/gemma-3-4b-it
 
+```
+
+### 6. 
+```bash
+huggingface-cli download google/gemma-2-2b-it --include "*.safetensors" "*.json" "tokenizer*"
+```
+
+```bash
+huggingface-cli download bartowski/gemma-2-9b-it-GGUF \
+--include "*Q4_K_M.gguf" \
+--local-dir ~/models/gemma-2-9b-it
 ```
 
 ## Interagindo com os modelos via API
